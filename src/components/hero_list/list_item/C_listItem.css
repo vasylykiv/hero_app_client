@@ -1,0 +1,54 @@
+.hero-li {
+  background-color: #ededed;
+  padding: 16px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.hero-li__wrapper {
+}
+
+.hero-li__content {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  align-items: center;
+}
+
+.hero-li__info_wrapper {
+  max-width: 900px;
+}
+
+.hero-li__image {
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.hero-li__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-li__nickname::first-letter,
+.hero-li__descr::first-letter {
+  text-transform: uppercase;
+}
+
+.hero-li__nickname {
+}
+
+.hero-li__name {
+  text-transform: capitalize;
+  margin-top: 4px;
+}
+
+.hero-li__descr {
+  margin-top: 12px;
+}

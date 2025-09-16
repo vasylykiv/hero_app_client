@@ -1,0 +1,22 @@
+.pagination {
+}
+
+.pagination__wrapper {
+}
+
+.pagination__content {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  font-size: 18px;
+}
+
+.pagination__dots,
+.pagination__buttons {
+  font-size: inherit;
+  background-color: #ededed;
+  border-radius: 100%;
+  padding: 8px 14px;
+
+  cursor: pointer;
+}

@@ -1,12 +1,16 @@
 import "./App.css";
-import HeroList from "./components/hero_list/hero_list";
+import { BrowserRouter, Routes, Route } from "react-router";
+import AllHeroes from "./routes/all_heroes/C_all_heroes";
+import Hero from "./routes/hero/C_hero";
 
 const App = () => {
   return (
-    <div className="content">
-      <HeroList />
-      <p>Start building amazing things with Rsbuild.</p>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<AllHeroes />} />
+        <Route path="hero/:id" element={<Hero />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
