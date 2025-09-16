@@ -25,6 +25,9 @@ function C_Hero() {
   const navigate = useNavigate();
   const [modalOpen, isModalOpen] = useState<boolean>(false);
 
+  const image = state.heroData.images_url;
+  console.log(image);
+
   useEffect(() => {
     if (state.isNeedReload) {
       dispatch({ type: "FETCH_START" });
@@ -59,7 +62,7 @@ function C_Hero() {
           <p>{state.heroData.origin_description}</p>
           <p>{state.heroData.catch_phrase}</p>
           <p>{state.heroData.superpowers}</p>
-          <div>{state.heroData.images_url && state.heroData.images_url.map((image) => <img key={image as string} src={image as string} alt="hero image" />)}</div>
+          <div>{image && image[0] !== null && image.map((image) => <img key={image as string} src={image as string} alt="hero image" />)}</div>
 
           <div>
             <button onClick={() => isModalOpen(true)}>Edit</button>

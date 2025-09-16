@@ -65,16 +65,14 @@ function C_Modal({ heroData }: { heroData: HeroInstance | null }) {
       formData.append("origin_description", data.origin_description);
       if (data.superpowers) formData.append("superpowers", data.superpowers);
       if (data.catch_phrase) formData.append("catch_phrase", data.catch_phrase);
-      if (allFiles.length > 0) {
-        allFiles.forEach((file) => {
-          formData.append("images", file);
-        });
-      } else {
-        formData.append("images", "");
-      }
+
+      allFiles.forEach((file) => {
+        formData.append("images", file);
+      });
 
       if (isEditMode) {
-        await axios.put(`http://localhost:3001/api/change_hero/${heroData.id}`, formData, {
+        const queryAction = allFiles.length > 0 ? "change" : "delete";
+        await axios.put(`http://localhost:3001/api/change_hero/${heroData.id}?action=${queryAction}`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
       } else {
