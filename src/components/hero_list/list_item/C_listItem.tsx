@@ -1,11 +1,15 @@
 import type { HeroesInstance } from "src/types/types";
+import { useNavigate } from "react-router";
+
 import "./C_listItem.css";
 
 function ListItem({ data }: { data: HeroesInstance }) {
   const placeholdersPath = "/placeholders/image_placeholder.png";
   const heroImage = data.image_url ? data.image_url : placeholdersPath;
+  const navigate = useNavigate();
+
   return (
-    <li className="hero-li">
+    <li onClick={() => navigate(`/hero/${data.id}`)} className="hero-li">
       <div className="hero-li__wrapper">
         <div className="hero-li__content">
           <div className="hero-li__image">

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router";
 import axios from "axios";
 
 import H_heroReducer from "../../hooks/reducer/H_heroReduser.js";
+import { H_HeroProvider } from "../../hooks/context/H_mainContext.js";
 
 import U_fetchHeroData from "../../utils/U_fetchHeroData.js";
 
@@ -21,12 +22,11 @@ const initialState: HeroState = {
 
 function C_Hero() {
   const params = useParams<{ id: string }>();
-  const [state, dispatch] = useReducer(H_heroReducer, initialState);
   const navigate = useNavigate();
+  const [state, dispatch] = useReducer(H_heroReducer, initialState);
   const [modalOpen, isModalOpen] = useState<boolean>(false);
 
   const image = state.heroData.images_url;
-  console.log(image);
 
   useEffect(() => {
     if (state.isNeedReload) {
@@ -53,37 +53,51 @@ function C_Hero() {
     navigate("/");
   }
 
+  useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalOpen]);
+
   return (
     <div>
       <div>
         <div>
-          <h1>{state.heroData.nickname}</h1>
-          <h2>{state.heroData.real_name}</h2>
-          <p>{state.heroData.origin_description}</p>
-          <p>{state.heroData.catch_phrase}</p>
-          <p>{state.heroData.superpowers}</p>
-          <div>{image && image[0] !== null && image.map((image) => <img key={image as string} src={image as string} alt="hero image" />)}</div>
+          <H_HeroProvider heroData={state.heroData}>
+            <h1>{state.heroData.nickname}</h1>
+            <h2>{state.heroData.real_name}</h2>
+            <p>{state.heroData.origin_description}</p>
+            <p>{state.heroData.catch_phrase}</p>
+            <p>{state.heroData.superpowers}</p>
+            <div>{image && image[0] !== null && image.map((image) => <img key={image as string} src={image as string} alt="hero image" />)}</div>
 
-          <div>
-            <button onClick={() => isModalOpen(true)}>Edit</button>
-          </div>
-
-          <div>
-            <button onClick={deleteHandle}>Delete</button>
-          </div>
-
-          {modalOpen && (
             <div>
+              <button onClick={() => isModalOpen(true)}>Edit</button>
+            </div>
+
+            <div>
+              <button onClick={deleteHandle}>Delete</button>
+            </div>
+
+            {modalOpen && (
               <div>
                 <div>
                   <div>
-                    <C_HeroFormModal heroData={state.heroData} />
+                    <div>
+                      <C_HeroFormModal heroData={state.heroData} />
+                    </div>
+                    <button onClick={() => isModalOpen(false)}>Close</button>
                   </div>
-                  <button onClick={() => isModalOpen(false)}>Close</button>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </H_HeroProvider>
         </div>
       </div>
     </div>

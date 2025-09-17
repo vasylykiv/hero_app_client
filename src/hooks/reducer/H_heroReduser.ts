@@ -8,7 +8,6 @@ function H_heroReducer(state: HeroState, action: Action): HeroState {
       return { ...state, isLoading: true };
     case "FETCH_SUCCESS":
       return {
-        ...state,
         heroData: { ...action.payload },
         isError: false,
         isLoading: false,

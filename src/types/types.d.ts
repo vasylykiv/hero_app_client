@@ -23,7 +23,7 @@ export interface HeroInstance {
   origin_description: string;
   superpowers?: string;
   catch_phrase?: string;
-  images_url?: (File | string)[];
+  images_url?: string[];
 }
 
 export interface ResponseData extends PaginationInstance {
@@ -39,6 +39,11 @@ export interface MainProviderProps {
   heroData: HeroesInstance[];
   paginationData: PaginationInstance;
   dispatch: Dispatch<Action>;
+}
+
+export interface HeroProviderProps {
+  children: React.ReactNode;
+  heroData: HeroInstance;
 }
 // ______________________________________________
 

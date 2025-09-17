@@ -1,0 +1,142 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.443);
+  width: 100vw;
+  height: 100vh;
+}
+
+.modal__wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  margin: auto;
+
+  z-index: 11;
+
+  width: 800px;
+  height: 800px;
+}
+
+.modal__content {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 12px;
+  padding: 26px;
+
+  overflow-y: scroll;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal__title {
+  align-self: center;
+}
+
+.modal__fields {
+  margin-top: 60px;
+  align-items: first baseline;
+
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.modal__field {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+
+  position: relative;
+}
+
+.modal__field p {
+  position: absolute;
+  bottom: -16px;
+  right: 0px;
+}
+
+.modal__field_name {
+  position: relative;
+  min-width: 90px;
+  width: fit-content;
+}
+
+.modal__field_name span {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  color: rgb(187, 44, 44);
+}
+
+.modal__field_input {
+  padding: 8px;
+  width: 100%;
+  height: 40px;
+
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+}
+
+.modal__field_textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* .modal__field_not-required {
+  color: #859fb6;
+}
+
+.modal__field_not-required input {
+  border: 1px dashed #6f89a0;
+} */
+
+.modal__field_images {
+}
+
+.modal__field_images {
+}
+
+.modal__submit {
+}
+
+.modal__field_images {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 2;
+  border-radius: 2;
+  border-color: #eeeeee;
+  border-style: dashed;
+  background-color: #fafafa;
+  color: #bdbdbd;
+  outline: none;
+  transition: "border .24s ease-in-out";
+}
+
+.modal__field_images--focused {
+  border-color: #2196f3;
+}
+
+.modal__field_images--accept {
+  border-color: #00e676;
+}
+
+.modal__field_images--reject {
+  border-color: #ff1744;
+}

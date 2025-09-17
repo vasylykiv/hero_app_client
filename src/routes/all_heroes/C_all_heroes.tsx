@@ -4,12 +4,14 @@ import C_HeroList from "../../components/hero_list/C_heroList.js";
 import C_Pagination from "../../components/pagination/C_pagination.js";
 import C_Modal from "../../components/modal/C_modal.js";
 
-import H_MainProvider from "../../hooks/context/H_mainContext.js";
+import { H_MainProvider } from "../../hooks/context/H_mainContext.js";
 import H_basicReducer from "../../hooks/reducer/H_heroesReduser.js";
 
 import U_fechData from "../../utils/U_fechData.js";
 
 import type { ResponseData, State } from "src/types/types";
+
+import "./C_all_heroes.css";
 
 const initialState: State = {
   heroData: [],
@@ -52,7 +54,7 @@ const AllHeroes = () => {
             {!state.isError ? (
               <H_MainProvider paginationData={state.paginationData} heroData={state.heroData} dispatch={dispatch}>
                 <C_HeroList />
-                <div>
+                <div className="heroapp__button_add-new">
                   <button onClick={() => isModalOpen(true)}>Add new</button>
                 </div>
                 {modalOpen && (
