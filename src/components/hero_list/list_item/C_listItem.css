@@ -44,7 +44,10 @@
   text-transform: uppercase;
 }
 
-.hero-li__nickname {
+.hero-li__nickname,
+.hero-li__name,
+.hero-li__descr {
+  max-width: 816px;
 }
 
 .hero-li__name {
@@ -62,6 +65,9 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  white-space: normal;
+  overflow-wrap: break-all;
 }
 
 /* Effects */
