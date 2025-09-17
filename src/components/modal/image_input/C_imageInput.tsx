@@ -88,16 +88,19 @@ function C_ImageInput({ isEdit, onFilesChange }: { isEdit: boolean; onFilesChang
       {({ getRootProps, getInputProps }) => (
         <div
           {...getRootProps({
-            className: "modal__field_images",
+            className: "modal__field_images_area",
             // ${isFocused ? "modal__field_images--focused" : ""}
             // ${isDragAccept ? "modal__field_images--accept" : ""}
             // ${isDragReject ? "modal__field_images--reject" : ""}
           })}
         >
-          <input {...getInputProps()} />
-          <p>Drag files here or click to select (maximum 5)</p>
-          <div>
-            {files.length > 0 &&
+          <input
+            {...getInputProps({
+              className: "modal__field_images_area",
+            })}
+          />
+          <div className={"modal__field_images_previews"}>
+            {files.length > 0 ? (
               files.map((image, index) => {
                 return (
                   <div key={image.name + index}>
@@ -105,7 +108,12 @@ function C_ImageInput({ isEdit, onFilesChange }: { isEdit: boolean; onFilesChang
                     <button onClick={(e) => handleDelete(e, index)}>&times; {/* Це символ "хрестик" */}</button>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <>
+                <p className="modal__field_images_placeholder">Drag files here or click to select</p>
+              </>
+            )}
           </div>
         </div>
       )}
