@@ -66,23 +66,47 @@ function C_Hero() {
   }, [modalOpen]);
 
   return (
-    <div>
-      <div>
-        <div>
+    <div className="heropage">
+      <div className="heropage__wrapper">
+        <div className="heropage__content">
           <H_HeroProvider heroData={state.heroData}>
-            <h1>{state.heroData.nickname}</h1>
-            <h2>{state.heroData.real_name}</h2>
-            <p>{state.heroData.origin_description}</p>
-            <p>{state.heroData.catch_phrase}</p>
-            <p>{state.heroData.superpowers}</p>
-            <div>{image && image[0] !== null && image.map((image) => <img key={image as string} src={image as string} alt="hero image" />)}</div>
+            <h1 className="heropage__nickname">Nickname: {state.heroData.nickname}</h1>
+            <h2 className="heropage__name">Real name: {state.heroData.real_name}</h2>
+            <hr />
 
-            <div>
-              <button onClick={() => isModalOpen(true)}>Edit</button>
+            <p className="heropage_descr">
+              Origin description: <span>c{state.heroData.origin_description}</span>
+            </p>
+
+            <p className="heropage__phrase">
+              Catch phrase: <span>{state.heroData.catch_phrase}</span>
+            </p>
+            <p className="heropage__superpovers">
+              Superpowers: <span>{state.heroData.superpowers}</span>
+            </p>
+            <hr />
+            <div className="heropage__images">
+              <span>Hero images</span>
+              <div className="heropage__images_wrapper">
+                {image &&
+                  image[0] !== null &&
+                  image.map((image) => (
+                    <div key={image} className="heropage__image">
+                      <img src={image as string} alt="hero image" />
+                    </div>
+                  ))}
+              </div>
             </div>
+            <hr />
 
-            <div>
-              <button onClick={deleteHandle}>Delete</button>
+            <div onClick={() => isModalOpen(true)} className="heropage__buttons">
+              <div className="heropage__open_modal">
+                <span>Edit</span>
+              </div>
+
+              <div onClick={deleteHandle} className="heropage__delete_hero">
+                <span>Delete</span>
+              </div>
             </div>
 
             {modalOpen && (
@@ -90,9 +114,8 @@ function C_Hero() {
                 <div>
                   <div>
                     <div>
-                      <C_HeroFormModal heroData={state.heroData} />
+                      <C_HeroFormModal heroData={state.heroData} closeModal={isModalOpen} />
                     </div>
-                    <button onClick={() => isModalOpen(false)}>Close</button>
                   </div>
                 </div>
               </div>

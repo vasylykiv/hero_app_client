@@ -1,122 +1,101 @@
 import Dropzone from "react-dropzone";
-import { HeroDataContext } from "src/hooks/context/H_mainContext";
-import { useContext, useEffect, useState, useCallback } from "react";
+import { useCallback } from "react";
 
-import axios from "axios";
+import type { HeroFormValues, PreviewFile } from "src/types/types";
+import type { UseFormSetError, UseFormClearErrors } from "react-hook-form";
+import type { FileRejection } from "react-dropzone";
 
-import type { HeroInstance } from "src/types/types";
+import "./C_imageInput.css";
 
-interface PreviewFile extends File {
-  preview: string;
+interface ImageInputProps {
+  value: PreviewFile[];
+  onChange: (files: PreviewFile[]) => void;
+  error?: string;
+  setError: UseFormSetError<HeroFormValues>;
+  clearErrors: UseFormClearErrors<HeroFormValues>;
 }
 
-function C_ImageInput({ isEdit, onFilesChange }: { isEdit: boolean; onFilesChange: React.Dispatch<React.SetStateAction<File[]>> }) {
-  const [files, setFiles] = useState<PreviewFile[]>([]);
-  const imagesOnPage = useContext<HeroInstance["images_url"]>(HeroDataContext) || [];
+function C_ImageInput({ value = [], onChange, setError, clearErrors }: ImageInputProps) {
+  const onDropAccepted = useCallback(
+    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+      if (fileRejections.length > 0) {
+        const firstRejection = fileRejections[0];
+        const errorCode = firstRejection.errors[0].code;
 
-  useEffect(() => {
-    onFilesChange(files);
-  }, [files, onFilesChange]);
-
-  useEffect(() => {
-    if (isEdit) {
-      try {
-        async function fetch(url: string) {
-          if (url.length <= 0) return;
-          const response = await axios.get(url, { responseType: "blob" });
-
-          const blob = response.data as Blob;
-          const filename = url.split("/").pop()!;
-
-          const blobFile = new File([blob], filename, { type: blob.type });
-
-          return Object.assign(blobFile, {
-            preview: URL.createObjectURL(blobFile),
-          });
+        let message = "File not accepted";
+        if (errorCode === "file-invalid-type") {
+          message = "Only PNG and JPG files are allowed.";
         }
 
-        async function storeCreatedImages(): Promise<void> {
-          const resultFiles = await Promise.all(imagesOnPage.map((image) => fetch(image).catch(() => null)));
-
-          if (resultFiles?.length > 0) setFiles(resultFiles as any);
-        }
-
-        storeCreatedImages();
-      } catch (error) {
-        console.error(error);
+        setError("images_url", { type: "manual", message });
+        return;
       }
-    }
 
-    return () => {
-      files.forEach((file) => URL.revokeObjectURL(file.preview));
-    };
-  }, [isEdit, imagesOnPage]);
-
-  const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-    setFiles((prevFiles) => {
-      const availableSlots = 5 - prevFiles.length;
-
-      if (availableSlots <= 0) {
-        return prevFiles;
+      if (value.length + acceptedFiles.length > 5) {
+        setError("images_url", { type: "manual", message: "You can upload up to 5 files." });
+        return;
       }
-      const filesToAdd = acceptedFiles.slice(0, availableSlots);
 
-      const newFilesWithPreview = filesToAdd.map((file) =>
+      clearErrors("images_url");
+
+      const newFilesWithPreview = acceptedFiles.map((file) =>
         Object.assign(file, {
           preview: URL.createObjectURL(file),
         })
       );
 
-      return [...prevFiles, ...newFilesWithPreview];
-    });
-  }, []);
+      onChange([...value, ...newFilesWithPreview]);
+    },
+    [value, onChange, setError, clearErrors]
+  );
 
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, currentImageId: number) => {
     e.stopPropagation();
-    const fileToDelete = files[currentImageId];
+    const fileToDelete = value[currentImageId];
     if (fileToDelete) {
       URL.revokeObjectURL(fileToDelete.preview);
     }
 
-    setFiles((prevFiles) => prevFiles.filter((_, imageId) => imageId !== currentImageId));
+    const newFiles = value.filter((_, imageId) => imageId !== currentImageId);
+    onChange(newFiles);
   };
 
-  console.log(files);
-
+  console.log(value);
   return (
     <Dropzone onDrop={onDropAccepted} accept={{ "image/*": [".png", ".jpg"] }}>
-      {({ getRootProps, getInputProps }) => (
-        <div
-          {...getRootProps({
-            className: "modal__field_images_area",
-            // ${isFocused ? "modal__field_images--focused" : ""}
-            // ${isDragAccept ? "modal__field_images--accept" : ""}
-            // ${isDragReject ? "modal__field_images--reject" : ""}
-          })}
-        >
-          <input
-            {...getInputProps({
-              className: "modal__field_images_area",
+      {({ getRootProps, getInputProps, isDragReject, isDragActive }) => {
+        const isFocused = isDragActive || value.length > 0;
+
+        return (
+          <div
+            {...getRootProps({
+              className: `modal__field_images_area ${isFocused ? "modal__field_images--focused" : ""} ${isDragReject ? "modal__field_images--reject" : ""}`,
             })}
-          />
-          <div className={"modal__field_images_previews"}>
-            {files.length > 0 ? (
-              files.map((image, index) => {
-                return (
-                  <div key={image.name + index}>
-                    <img src={image.preview} width={100} height={100} style={{ objectFit: "contain" }} alt="preview" />
-                    <button onClick={(e) => handleDelete(e, index)}>&times; {/* Це символ "хрестик" */}</button>
-                  </div>
-                );
-              })
-            ) : (
-              <>
-                <p className="modal__field_images_placeholder">Drag files here or click to select</p>
-              </>
-            )}
+          >
+            <input
+              {...getInputProps({
+                className: "modal__field_images_area",
+              })}
+            />
+            <div className={"modal__field_images_previews"}>
+              {value.length > 0 ? (
+                value.map((image, index) => {
+                  return (
+                    <div className="modal__field_images_preview" key={image.name + index}>
+                      <img src={image.preview} width={100} height={100} style={{ objectFit: "contain" }} alt="preview" />
+                      <button onClick={(e) => handleDelete(e, index)}>&times;</button>
+                    </div>
+                  );
+                })
+              ) : (
+                <>
+                  <p className="modal__field_images_placeholder">Drag files here or click to select</p>
+                </>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      }}
     </Dropzone>
   );
 }

@@ -1,0 +1,12 @@
+.modal__field_images_preview {
+  position: relative;
+  border: 1px solid #d5d5d5;
+}
+.modal__field_images_preview button {
+  position: absolute;
+  font-size: 24px;
+  color: #ff1744;
+  top: -14px;
+  right: -8px;
+  cursor: pointer;
+}

@@ -23,8 +23,18 @@ export interface HeroInstance {
   origin_description: string;
   superpowers?: string;
   catch_phrase?: string;
-  images_url?: string[];
+  images_url: string[];
 }
+
+export type HeroFormValues = {
+  id?: string;
+  nickname: string;
+  real_name: string;
+  origin_description: string;
+  superpowers?: string;
+  catch_phrase?: string;
+  images_url: PreviewFile[]; // <-- ВАЖЛИВО: тут масив файлів
+};
 
 export interface ResponseData extends PaginationInstance {
   data: HeroesInstance[];
@@ -72,3 +82,7 @@ export type Action =
 
 export type HeroAction = { type: "FETCH_START" } | { type: "FETCH_SUCCESS"; payload: HeroesInstance[] } | { type: "FETCH_ERROR" } | { type: "SET_NEED_RELOAD"; payload: boolean };
 // ______________________________________________
+
+export interface PreviewFile extends File {
+  preview: string;
+}

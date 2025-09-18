@@ -8,7 +8,9 @@ import C_ListItem from "./list_item/C_listItem";
 
 function C_HeroList() {
   const listData = useContext(HeroesDataContext);
-  return <ul className="hero__list">{listData ? listData.map((item) => <C_ListItem key={item.id} data={item} />) : <div>Empty</div>}</ul>;
+
+  console.log(listData);
+  return <ul className="hero__list">{listData?.length > 0 ? listData.map((item) => <C_ListItem key={item.id} data={item} />) : <div className="hero__list_empty">Empty</div>}</ul>;
 }
 
 export default C_HeroList;

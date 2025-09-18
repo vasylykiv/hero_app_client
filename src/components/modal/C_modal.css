@@ -61,6 +61,12 @@
   position: relative;
 }
 
+.modal__field span {
+  position: absolute;
+  bottom: -24px;
+  right: 8px;
+}
+
 .modal__field_name {
   position: relative;
   min-width: 90px;
@@ -81,22 +87,29 @@
 
   border: 1px solid #dcdcdc;
   border-radius: 8px;
+  transition: 0.1s ease-out all;
+  font-family: Inter;
+  font-size: 14px;
+}
+
+.modal__field_input_err {
+  border: 1px solid rgb(255, 62, 62);
+  /* transition: 0.1s ease-out all; */
+}
+
+.modal__field_input:focus {
+  border: 1px solid #3d3d3d;
+  outline: none;
+}
+
+.modal__field_input_err:focus {
+  border: 1px solid rgb(255, 0, 0);
+  outline: 1px solid rgb(255, 0, 0);
 }
 
 .modal__field_textarea {
   height: 120px;
   resize: none;
-}
-
-/* .modal__field_not-required {
-  color: #859fb6;
-}
-
-.modal__field_not-required input {
-  border: 1px dashed #6f89a0;
-} */
-
-.modal__field_images {
 }
 
 .modal__field_images {
@@ -115,12 +128,18 @@
 
   outline: none;
   transition: "border .24s ease-in-out";
+  cursor: pointer;
+  transition: 0.1s ease-out all;
+}
+
+.modal__field_images_area:hover {
+  border-color: #6a9ffa;
 }
 
 .modal__field_images_previews {
   display: flex;
   flex-direction: row;
-  gap: 6px;
+  gap: 12px;
 }
 
 .modal__field_images_placeholder {
@@ -134,13 +153,51 @@
 }
 
 .modal__field_images--focused {
-  border-color: #2196f3;
+  border-color: #6f89a0;
 }
 
 .modal__field_images--accept {
-  border-color: #00e676;
+  border-color: #6f89a0;
 }
 
 .modal__field_images--reject {
   border-color: #ff1744;
+}
+
+.modal__submit {
+  display: flex;
+  align-self: center;
+}
+
+.modal__submit button {
+  font-family: Inter;
+  font-size: 16px;
+  height: 55px;
+
+  padding: 16px;
+  width: 200px;
+
+  color: white;
+  background-color: rgb(12, 165, 35);
+
+  border-radius: 8px;
+  transition: 0.08s ease-out all;
+}
+
+.modal__submit:hover button {
+  background-color: rgb(69, 187, 86);
+}
+
+.modal__submit:active button {
+  font-size: 15.6px;
+  background-color: rgb(26, 127, 41);
+}
+
+.modal__close {
+  position: absolute;
+  font-size: 36px;
+  color: #ff1744;
+  top: 4px;
+  right: 14px;
+  cursor: pointer;
 }
