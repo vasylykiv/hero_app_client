@@ -12,7 +12,9 @@ The application also has an implemented pagination system.
 
 You can only upload images in **jpg** and **png** format, and no more than **5 images**.
 
----
+## To get started, you need to go to the repository with the backend and follow the instructions
+Link: https://github.com/vasylykiv/hero_app_server.git
+
 
 ## 🎨 Screenshots
 
