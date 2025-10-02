@@ -18,10 +18,7 @@ You can only upload images in **jpg** and **png** format, and no more than **5 i
 
 ### Hero List
 
-| Home page (Empty)
-| Home page (Add new hero)
-| Home page  
-|
+| Home page (Empty)                                                                                                                                         | Home page (Add new hero)                                                                                                                                   | Home page                                                                                                                                              |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <img src="https://github.com/vasylykiv/hero_app_client/blob/96ba907fe08da4966a40d072b111adfe74ead13d/app_previews/1_page_without_heroes.png" width="260"> | <img src="https://github.com/vasylykiv/hero_app_client/blob/96ba907fe08da4966a40d072b111adfe74ead13d/app_previews/2_page_create_new_hero.png" width="260"> | <img src="https://github.com/vasylykiv/hero_app_client/blob/96ba907fe08da4966a40d072b111adfe74ead13d/app_previews/3_page_with_heroes.png" width="260"> |
 
@@ -29,9 +26,7 @@ You can only upload images in **jpg** and **png** format, and no more than **5 i
 
 ### Hero Page
 
-| Hero page  
-| Hero page (edit)  
-|
+| Hero page                                                                                                                                       | Hero page (edit)                                                                                                                                     |
 | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://github.com/vasylykiv/hero_app_client/blob/96ba907fe08da4966a40d072b111adfe74ead13d/app_previews/4_page_hero.png" width="260"> | <img src="https://github.com/vasylykiv/hero_app_client/blob/96ba907fe08da4966a40d072b111adfe74ead13d/app_previews/5_page_hero_edit.png" width="260"> |
 
