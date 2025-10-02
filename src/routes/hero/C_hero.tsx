@@ -14,7 +14,15 @@ import type { HeroInstance, HeroState } from "src/types/types";
 import "./C_hero.css";
 
 const initialState: HeroState = {
-  heroData: { id: "", nickname: "", real_name: "", origin_description: "", superpowers: "", catch_phrase: "", images_url: [] },
+  heroData: {
+    id: "",
+    nickname: "",
+    real_name: "",
+    origin_description: "",
+    superpowers: "",
+    catch_phrase: "",
+    images_url: [],
+  },
   isLoading: false,
   isError: false,
   isNeedReload: true,
@@ -70,21 +78,32 @@ function C_Hero() {
       <div className="heropage__wrapper">
         <div className="heropage__content">
           <H_HeroProvider heroData={state.heroData}>
-            <h1 className="heropage__nickname">Nickname: {state.heroData.nickname}</h1>
-            <h2 className="heropage__name">Real name: {state.heroData.real_name}</h2>
-            <hr />
+            <h1 className="heropage__nickname">{state.heroData.nickname}</h1>
+            <h2 className="heropage__name">{state.heroData.real_name}</h2>
 
-            <p className="heropage_descr">
-              Origin description: <span>c{state.heroData.origin_description}</span>
-            </p>
+            <div className="heropage__info-wrapper">
+              {state.heroData?.origin_description && (
+                <p className="heropage_descr">
+                  <span className="heropage__label">Origin description: </span>
+                  <span>{state.heroData.origin_description}</span>
+                </p>
+              )}
 
-            <p className="heropage__phrase">
-              Catch phrase: <span>{state.heroData.catch_phrase}</span>
-            </p>
-            <p className="heropage__superpovers">
-              Superpowers: <span>{state.heroData.superpowers}</span>
-            </p>
-            <hr />
+              {state.heroData?.catch_phrase && (
+                <p className="heropage__phrase">
+                  <span className="heropage__label">Catch phrase: </span>
+                  <span>{state.heroData.catch_phrase}</span>
+                </p>
+              )}
+
+              {state.heroData?.superpowers && (
+                <p className="heropage__superpovers">
+                  <span className="heropage__label">Superpowers: </span>
+                  <span>{state.heroData.superpowers}</span>
+                </p>
+              )}
+            </div>
+
             <div className="heropage__images">
               <span>Hero images</span>
               <div className="heropage__images_wrapper">
@@ -97,7 +116,6 @@ function C_Hero() {
                   ))}
               </div>
             </div>
-            <hr />
 
             <div onClick={() => isModalOpen(true)} className="heropage__buttons">
               <div className="heropage__open_modal">

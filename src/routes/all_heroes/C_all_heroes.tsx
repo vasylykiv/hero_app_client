@@ -62,7 +62,7 @@ const AllHeroes = () => {
                     <div>
                       <div>
                         <div>
-                          <C_Modal heroData={null} />
+                          <C_Modal heroData={null} closeModal={isModalOpen} />
                         </div>
                         <button onClick={() => isModalOpen(false)}>Close</button>
                       </div>

@@ -69,7 +69,9 @@ function C_ImageInput({ value = [], onChange, setError, clearErrors }: ImageInpu
         return (
           <div
             {...getRootProps({
-              className: `modal__field_images_area ${isFocused ? "modal__field_images--focused" : ""} ${isDragReject ? "modal__field_images--reject" : ""}`,
+              className: `modal__field_images_area ${isFocused ? "modal__field_images--focused" : ""} ${
+                isDragReject ? "modal__field_images--reject" : ""
+              }`,
             })}
           >
             <input
@@ -82,7 +84,7 @@ function C_ImageInput({ value = [], onChange, setError, clearErrors }: ImageInpu
                 value.map((image, index) => {
                   return (
                     <div className="modal__field_images_preview" key={image.name + index}>
-                      <img src={image.preview} width={100} height={100} style={{ objectFit: "contain" }} alt="preview" />
+                      <img src={image.preview} width={100} height={100} style={{ objectFit: "cover" }} alt="preview" />
                       <button onClick={(e) => handleDelete(e, index)}>&times;</button>
                     </div>
                   );

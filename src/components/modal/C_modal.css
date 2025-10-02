@@ -139,7 +139,7 @@
 .modal__field_images_previews {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 16px;
 }
 
 .modal__field_images_placeholder {
@@ -200,4 +200,30 @@
   top: 4px;
   right: 14px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .modal__wrapper {
+    width: 100%;
+    overflow-y: scroll;
+  }
+
+  .modal__fields {
+    gap: 24px;
+  }
+
+  .modal__field {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .modal__field_images {
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .modal__field_images_placeholder {
+    font-size: 12px;
+  }
 }

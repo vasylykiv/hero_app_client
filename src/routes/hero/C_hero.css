@@ -5,7 +5,6 @@
 
   display: flex;
   flex-direction: column;
-  gap: 16px;
   margin-top: 40px;
   justify-content: center;
 }
@@ -15,8 +14,26 @@
   font-size: 32px;
 }
 .heropage__name {
+  margin-top: 6px;
   align-self: center;
   font-size: 24px;
+  font-weight: 400;
+  color: #587cb5;
+}
+
+.heropage__info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  max-width: 600px;
+  margin: 36px auto;
+}
+
+.heropage__info-wrapper p {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .heropage_descr {
@@ -31,12 +48,16 @@
   align-self: center;
 }
 
+.heropage__label {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 .heropage__images {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 40px;
 }
 
 .heropage__images {
@@ -44,6 +65,7 @@
 }
 
 .heropage__images_wrapper {
+  margin-top: 24px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -54,13 +76,13 @@
 .heropage__image {
   width: 400px;
   height: auto;
-  border: 3px dashed #f2f2f2;
+  border: 3px dashed #e2e2e2;
 }
 
 .heropage__image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .heropage__buttons {
@@ -68,7 +90,7 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .heropage__open_modal,
@@ -86,29 +108,29 @@
 }
 
 .heropage__open_modal {
-  background-color: rgb(51, 209, 40);
+  background-color: #76ad72;
 }
 
 .heropage__open_modal:hover {
-  background-color: rgb(48, 150, 40);
+  background-color: #6fa36b;
 }
 
 .heropage__open_modal:active {
   font-size: 15px;
-  background-color: rgb(43, 173, 34);
+  background-color: #8fcf8b;
 }
 
 .heropage__delete_hero {
-  background-color: rgb(205, 37, 45);
+  background-color: #c9363d;
 }
 
 .heropage__delete_hero:hover {
-  background-color: rgb(225, 76, 84);
+  background-color: #b83239;
 }
 
 .heropage__delete_hero:active {
   font-size: 15px;
-  background-color: rgb(180, 33, 40);
+  background-color: #dc3e46;
 }
 
 .heropage__open_modal span,
@@ -121,4 +143,34 @@
 .heropage__open_modal:active span,
 .heropage__delete_hero:active span {
   font-size: 15px;
+}
+
+@media screen and (max-width: 800px) {
+  .heropage__content {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .heropage__buttons {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .heropage__content {
+    padding: 10px;
+  }
+
+  .heropage__image {
+    width: 100%;
+  }
+
+  .heropage__buttons {
+    width: 100%;
+  }
+
+  .heropage__open_modal,
+  .heropage__delete_hero {
+    width: 100%;
+  }
 }

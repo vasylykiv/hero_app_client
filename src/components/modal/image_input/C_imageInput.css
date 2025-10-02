@@ -1,6 +1,8 @@
 .modal__field_images_preview {
   position: relative;
   border: 1px solid #d5d5d5;
+  width: 100px;
+  height: 100px;
 }
 .modal__field_images_preview button {
   position: absolute;
@@ -9,4 +11,10 @@
   top: -14px;
   right: -8px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+  .modal__field_images_previews {
+    flex-wrap: wrap;
+  }
 }
